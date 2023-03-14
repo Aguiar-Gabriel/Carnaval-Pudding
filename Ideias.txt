@@ -1,5 +1,5 @@
 Flow:
-- DA/DS: Dividir os dados entre moradores e visitantes?
+- DA/DS: Dividir os dados entre moradores e visitantes para diminuir a quantidade de colunas nulas.
 - DA/DS: limpeza de dados
 - DA/DS: lidando com valores nulos
 - DA/DS: EDA
