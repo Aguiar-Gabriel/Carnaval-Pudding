@@ -1,0 +1,8 @@
+Flow:
+- DA/DS: limpeza de dados
+- DA/DS: EDA
+- DA: analise estatisca e apresentacao de dados?
+- DS: modelo ML para escolher estados que trazem mais retorno a prefeitura de BH
+	- para direcionar promoção e marketing, baseado na distribuição demográfica (Census)
+
+- Web: storytelling
