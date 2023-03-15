@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My Machine Learning App</title>
+</head>
+<body>
+	<h1>Enter some information:</h1>
+	<form action="/predict" method="post">
+		<label for="idade">Idade:</label>
+		<input type="number" name="idade" required><br><br>
+		<label for="genero">Gênero:</label>
+		<div class="dropdown">
+			<button class="dropbtn" type="button">Select</button>
+			<div class="dropdown-content">
+				<a href="#" value="M">Masculino</a>
+				<a href="#" value="F">Feminino</a>
+			</div>
+			<input type="hidden" name="genero" id="gender-input" value="" required>
+		</div><br><br>
+		<label for="estado_civil">Estado Civil:</label>
+		<div class="dropdown">
+			<button class="dropbtn" type="button">Select</button>
+			<div class="dropdown-content">
+				<a href="#" value="Solteiro (a)">Solteiro (a)</a>
+				<a href="#" value="Casado (a)">Casado (a)</a>
+				<a href="#" value="Outro">Outro</a>
+				<a href="#" value="Divorciado (a)">Divorciado (a)</a>
+				<a href="#" value="Viuvo (a)">Viuvo (a)</a>
+				<a href="#" value="Nao respondeu">Não respondeu</a>
+			</div>
+			<input type="hidden" name="estado_civil" id="civil-status-input" value="" required>
+		</div><br><br>
+		<input type="submit" value="Predict">
+	</form>
+	<script>
+		/* Update hidden input field with selected gender */
+		const genderButtons = document.querySelectorAll('.gender-dropdown-content a');
+		const genderInput = document.querySelector('#gender-input');
+		genderButtons.forEach(button => {
+			button.addEventListener('click', (e) => {
+				e.preventDefault();
+				genderInput.value = button.getAttribute('value');
+				document.querySelector('.gender-dropbtn').textContent = button.textContent;
+			})
+		})
+		/* Update hidden input field with selected civil status */
+		const civilStatusButtons = document.querySelectorAll('.civil-status-dropdown-content a');
+		const civilStatusInput = document.querySelector('#civil-status-input');
+		civilStatusButtons.forEach(button => {
+			button.addEventListener('click', (e) => {
+				e.preventDefault();
+				civilStatusInput.value = button.getAttribute('value');
+				document.querySelector('.civil-status-dropbtn').textContent = button.textContent;
+			})
+		})
+	</script>
+</body>
+</html>

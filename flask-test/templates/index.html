@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My Machine Learning App</title>
+	<style>
+		/* Style for dropdown menus */
+		.dropdown {
+			position: relative;
+			display: inline-block;
+		}
+		.dropdown-content {
+			display: none;
+			position: absolute;
+			z-index: 1;
+		}
+		.dropdown-content span {
+			display: block;
+			padding: 10px;
+			text-decoration: none;
+			color: #000;
+			background-color: #f2f2f2;
+			border: 1px solid #ddd;
+			cursor: pointer;
+		}
+		.dropdown:hover .dropdown-content {
+			display: block;
+		}
+	</style>
+</head>
+<body>
+	<h1>Descubra qual bloco é a sua cara</h1>
+	<form id="ml-form">
+		<label for="idade">Idade:</label>
+		<input type="number" name="idade" required><br><br>
+		<label for="genero">Gênero:</label>
+		<div class="dropdown">
+			<input type="text" class="dropbtn gender-dropbtn" value="Select" readonly>
+			<div class="dropdown-content gender-dropdown-content">
+				<span value="M">Masculino</span>
+				<span value="F">Feminino</span>
+			</div>
+			<input type="hidden" name="genero" id="gender-input" value="" required>
+		</div><br><br>
+		<label for="estado_civil">Estado Civil:</label>
+		<div class="dropdown">
+			<input type="text" class="dropbtn civil-status-dropbtn" value="Select" readonly>
+			<div class="dropdown-content civil-status-dropdown-content">
+				<span value="Solteiro (a)">Solteiro (a)</span>
+				<span value="Casado (a)">Casado (a)</span>
+				<span value="Outro">Outro</span>
+				<span value="Divorciado (a)">Divorciado (a)</span>
+				<span value="Viuvo (a)">Viuvo (a)</span>
+				<span value="Nao respondeu">Não respondeu</span>
+			</div>
+			<input type="hidden" name="estado_civil" id="civil-status-input" value="" required>
+		</div><br><br>
+		<button type="submit">Predict</button>
+	</form>
+	<div id="results" style="display: none;">
+		<h2>Predicted Results:</h2>
+		<p id="prediction"></p>
+	</div>
+	<script>
+		const form = document.getElementById('ml-form');
+		const genderButtons = document.querySelectorAll('.gender-dropdown-content span');
+		const genderInput = document.querySelector('#gender-input');
+		const civilStatusButtons = document.querySelectorAll('.civil-status-dropdown-content span');
+		const civilStatusInput = document.querySelector('#civil-status-input');
+		const predictionElement = document.getElementById('prediction');
+		const resultsElement = document.getElementById('results');
+	
+		form.addEventListener('submit', (e) => {
+			e.preventDefault();
+			const formData = new FormData(form);
+			formData.set('genero', genderInput.value);
+			formData.set('estado_civil', civilStatusInput.value);
+	
+			fetch('/predict', {
+				method: 'POST',
+				body: formData
+			})
+			.then(response => response.json())
+			.then(data => {
+				predictionElement.textContent = data.prediction;
+				resultsElement.style.display = 'block';
+			})
+			.catch(error => console.error(error));
+		});
+	
+		genderButtons.forEach(button => {
+			button.addEventListener('click', (e) => {
+				e.preventDefault();
+				genderInput.value = button.getAttribute('value');
+				document.querySelector('.gender-dropbtn').value = button.textContent;
+			});
+		});
+	
+		civilStatusButtons.forEach(button => {
+			button.addEventListener('click', (e) => {
+				e.preventDefault();
+				civilStatusInput.value = button.getAttribute('value');
+				document.querySelector('.civil-status-dropbtn').value = button.textContent;
+			});
+		});
+	</script>
