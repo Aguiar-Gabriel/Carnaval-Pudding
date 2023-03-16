@@ -1,0 +1,169 @@
+/* Add a background image of carnival parade */
+body {
+    background-image: url("https://images.unsplash.com/photo-1549756710-740d876f9ab9");
+    background-size: cover;
+    background-color: yellow;
+    
+  }
+  
+  /* Change the font style and color of the h1 tag */
+  h1 {
+    font-family: 'Pacifico', cursive;
+    color: #ff8080;
+  }
+
+  h1, h2 {
+    text-align: center;
+  }
+  
+  
+  /* Style the form inputs */
+  input[type="number"], input[type="text"], button {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: none;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1em;
+    padding: 10px;
+  }
+  
+  input[type="number"]:focus, input[type="text"]:focus, button:focus {
+    outline: none;
+  }
+  
+  /* Style the dropdown menus */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  .dropdown-content span {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #000;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  .dropdown-content span:hover {
+    background-color: #ff8080;
+    color: #fff;
+  }
+  
+  /* Style the hidden inputs */
+  input[type="hidden"] {
+    display: none;
+  }
+  
+  /* Style the Predict button */
+  button[type="submit"] {
+    background-color: #ff8080;
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #fff;
+    color: #ff8080;
+    cursor: pointer;
+  }
+  
+  /* Style the Predicted Results section */
+  #results {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    margin-top: 20px;
+    padding: 20px;
+  }
+  
+  #results h2 {
+    color: #ff8080;
+    font-family: 'Pacifico', cursive;
+    font-size: 1.5em;
+  }
+  
+  #prediction {
+    font-size: 1.2em;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  /* FORMULARIO QUIZZ */
+  .container {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  button {
+    margin-top: 5px;
+  }
+  
+  
+  .page-1-content, .page-2-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .text-and-graph {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+  }
+  
+  .text-and-graph p {
+    width: 45%;
+  }
+  
+  .graph-container {
+    width: 45%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }
+  
+  .graph-container img {
+    width: 70%;
+    height: auto;
+  }
+  
+  
+  

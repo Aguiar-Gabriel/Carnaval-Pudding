@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>My Machine Learning App</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 	<style>
 		/* Style for dropdown menus */
 		.dropdown {
@@ -28,38 +29,81 @@
 	</style>
 </head>
 <body>
-	<h1>Descubra qual bloco é a sua cara</h1>
-	<form id="ml-form">
-		<label for="idade">Idade:</label>
-		<input type="number" name="idade" required><br><br>
-		<label for="genero">Gênero:</label>
-		<div class="dropdown">
+	<!-- <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script> -->
+
+	<!-- Page 1: Title, Subtitle, Paragraph, and Graph -->
+	<div class="page-1">
+		<h1>O Carnaval de BH é para você? Descubra</h1>
+		<h2>Análise do perfil geral do folião de BH</h2>
+		<div class="page-1-content">
+		  <div class="text-and-graph">
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec hendrerit dui eget odio lacinia laoreet...
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec hendrerit dui eget odio lacinia laoreet...
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec hendrerit dui eget odio lacinia laoreet...
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec hendrerit dui eget odio lacinia laoreet...
+
+			</p>
+			<div class="graph-container">
+			  <img src="{{ url_for('static', filename='graph.png') }}" alt="Graph">
+			</div>
+		  </div>
+		</div>
+	  </div>>
+
+	  <!-- Page 2: Title, Subtitle, Paragraph, and Graph -->
+	  <div class="page-2">
+		<h1>O Carnaval de BH é para você? Descubra</h1>
+		<h2>Análise do perfil geral do folião de BH</h2>
+		<div class="page-2-content">
+		  <div class="text-and-graph">
+			<div class="graph-container">
+			  <img src="{{ url_for('static', filename='graph2.jpg') }}" alt="Graph">
+			</div>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec hendrerit dui eget odio lacinia laoreet...
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec hendrerit dui eget odio lacinia laoreet...
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec hendrerit dui eget odio lacinia laoreet...
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec hendrerit dui eget odio lacinia laoreet...
+			</p>
+		  </div>
+		</div>
+	  </div>
+	
+	<!-- BuzzFeed Quizz Form -->
+	<div class="container">
+		<h1>Descubra qual bloco é a sua cara</h1>
+		<form id="ml-form">
+		  <label for="idade">Idade:</label>
+		  <input type="number" name="idade" required><br><br>
+		  <label for="genero">Gênero:</label>
+		  <div class="dropdown">
 			<input type="text" class="dropbtn gender-dropbtn" value="Select" readonly>
 			<div class="dropdown-content gender-dropdown-content">
-				<span value="M">Masculino</span>
-				<span value="F">Feminino</span>
+			  <span value="M">Masculino</span>
+			  <span value="F">Feminino</span>
 			</div>
 			<input type="hidden" name="genero" id="gender-input" value="" required>
-		</div><br><br>
-		<label for="estado_civil">Estado Civil:</label>
-		<div class="dropdown">
+		  </div><br><br>
+		  <label for="estado_civil">Estado Civil:</label>
+		  <div class="dropdown">
 			<input type="text" class="dropbtn civil-status-dropbtn" value="Select" readonly>
 			<div class="dropdown-content civil-status-dropdown-content">
-				<span value="Solteiro (a)">Solteiro (a)</span>
-				<span value="Casado (a)">Casado (a)</span>
-				<span value="Outro">Outro</span>
-				<span value="Divorciado (a)">Divorciado (a)</span>
-				<span value="Viuvo (a)">Viuvo (a)</span>
-				<span value="Nao respondeu">Não respondeu</span>
+			  <span value="Solteiro (a)">Solteiro (a)</span>
+			  <span value="Casado (a)">Casado (a)</span>
+			  <span value="Outro">Outro</span>
+			  <span value="Divorciado (a)">Divorciado (a)</span>
+			  <span value="Viuvo (a)">Viuvo (a)</span>
+			  <span value="Nao respondeu">Não respondeu</span>
 			</div>
 			<input type="hidden" name="estado_civil" id="civil-status-input" value="" required>
-		</div><br><br>
-		<button type="submit">Predict</button>
-	</form>
-	<div id="results" style="display: none;">
-		<h2>Predicted Results:</h2>
-		<p id="prediction"></p>
-	</div>
+		  </div><br><br>
+		  <button type="submit">Predict</button>
+		</form>
+		<div id="results" style="display: none;">
+		  <h2>O bloco que tem a sua cara é:</h2>
+		  <p id="prediction"></p>
+		</div>
+	  </div>
+	  
 	<script>
 		const form = document.getElementById('ml-form');
 		const genderButtons = document.querySelectorAll('.gender-dropdown-content span');
