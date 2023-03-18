@@ -96,6 +96,20 @@
 			</div>
 			<input type="hidden" name="estado_civil" id="civil-status-input" value="" required>
 		  </div><br><br>
+		  <div class="faixa-renda-dropdown">
+			<label for="faixa_renda">Faixa de Renda:</label>
+			<div class="dropdown">
+			  <input type="text" class="dropbtn faixa-renda-dropbtn" value="Select" readonly>
+			  <div class="dropdown-content faixa-renda-dropdown-content">
+				<span value="De 2 a 4 salários (R$ 1.908,00 - R$ 3.816,00)">De 2 a 4 salários (R$ 1.908,00 - R$ 3.816,00)</span>
+				<span value="De 4 a 8 salários (R$ 3.816,00 - R$ 7.632,00)">De 4 a 8 salários (R$ 3.816,00 - R$ 7.632,00)</span>
+				<span value="Acima de 8 salários (acima de R$ 7.632,00)">Acima de 8 salários (acima de R$ 7.632,00)</span>
+				<span value="De 1 a 2 salários (R$ 954,00 - R$ 1.908,00)">De 1 a 2 salários (R$ 954,00 - R$ 1.908,00)</span>
+				<span value="Até um salário mínimo (R$ 954,00)">Até um salário mínimo (R$ 954,00)</span>
+			  </div>
+			  <input type="hidden" name="faixa_renda" id="faixa-renda-input" value="" required>
+			</div><br><br>
+		  </div>		  
 		  <button type="submit">Predict</button>
 		</form>
 		<div id="results" style="display: none;">
@@ -104,46 +118,58 @@
 		</div>
 	  </div>
 	  
-	<script>
+	  <script>
 		const form = document.getElementById('ml-form');
 		const genderButtons = document.querySelectorAll('.gender-dropdown-content span');
 		const genderInput = document.querySelector('#gender-input');
 		const civilStatusButtons = document.querySelectorAll('.civil-status-dropdown-content span');
 		const civilStatusInput = document.querySelector('#civil-status-input');
+		const faixaRendaButtons = document.querySelectorAll('.faixa-renda-dropdown-content span');
+		const faixaRendaInput = document.querySelector('#faixa-renda-input');
 		const predictionElement = document.getElementById('prediction');
 		const resultsElement = document.getElementById('results');
-	
+	  
 		form.addEventListener('submit', (e) => {
-			e.preventDefault();
-			const formData = new FormData(form);
-			formData.set('genero', genderInput.value);
-			formData.set('estado_civil', civilStatusInput.value);
-	
-			fetch('/predict', {
-				method: 'POST',
-				body: formData
-			})
-			.then(response => response.json())
-			.then(data => {
-				predictionElement.textContent = data.prediction;
-				resultsElement.style.display = 'block';
-			})
-			.catch(error => console.error(error));
+		  e.preventDefault();
+		  const formData = new FormData(form);
+		  formData.set('genero', genderInput.value);
+		  formData.set('estado_civil', civilStatusInput.value);
+		  formData.set('faixa_renda', faixaRendaInput.value);
+	  
+		  fetch('/predict', {
+			method: 'POST',
+			body: formData
+		  })
+		  .then(response => response.json())
+		  .then(data => {
+			predictionElement.textContent = data.prediction;
+			resultsElement.style.display = 'block';
+		  })
+		  .catch(error => console.error(error));
 		});
-	
+	  
 		genderButtons.forEach(button => {
-			button.addEventListener('click', (e) => {
-				e.preventDefault();
-				genderInput.value = button.getAttribute('value');
-				document.querySelector('.gender-dropbtn').value = button.textContent;
-			});
+		  button.addEventListener('click', (e) => {
+			e.preventDefault();
+			genderInput.value = button.getAttribute('value');
+			document.querySelector('.gender-dropbtn').value = button.textContent;
+		  });
 		});
-	
+	  
 		civilStatusButtons.forEach(button => {
-			button.addEventListener('click', (e) => {
-				e.preventDefault();
-				civilStatusInput.value = button.getAttribute('value');
-				document.querySelector('.civil-status-dropbtn').value = button.textContent;
-			});
+		  button.addEventListener('click', (e) => {
+			e.preventDefault();
+			civilStatusInput.value = button.getAttribute('value');
+			document.querySelector('.civil-status-dropbtn').value = button.textContent;
+		  });
 		});
-	</script>
+	  
+		faixaRendaButtons.forEach(button => {
+		  button.addEventListener('click', (e) => {
+			e.preventDefault();
+			faixaRendaInput.value = button.getAttribute('value');
+			document.querySelector('.faixa-renda-dropbtn').value = button.textContent;
+		  });
+		});
+	  </script>
+	  

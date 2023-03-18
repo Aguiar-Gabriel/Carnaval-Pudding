@@ -165,5 +165,48 @@ body {
     height: auto;
   }
   
+  /* Style the faixa_renda dropdown */
+  .faixa-renda-dropdown {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
   
+  .faixa-renda-dropdown .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .faixa-renda-dropdown .dropdown-content {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  .faixa-renda-dropdown .dropdown-content span {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #000;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .faixa-renda-dropdown .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  .faixa-renda-dropdown .dropdown-content span:hover {
+    background-color: #ff8080;
+    color: #fff;
+  }
+  
+  /* Style the hidden faixa_renda input */
+  .faixa-renda-dropdown input[type="hidden"] {
+    display: none;
+  }
+
   
