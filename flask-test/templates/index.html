@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My Machine Learning App</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+	<style>
+		/* Style for dropdown menus */
+		.dropdown {
+			position: relative;
+			display: inline-block;
+		}
+		.dropdown-content {
+			display: none;
+			position: absolute;
+			z-index: 1;
+		}
+		.dropdown-content span {
+			display: block;
+			padding: 10px;
+			text-decoration: none;
+			color: #000;
+			background-color: #f2f2f2;
+			border: 1px solid #ddd;
+			cursor: pointer;
+		}
+		.dropdown:hover .dropdown-content {
+			display: block;
+		}
+	</style>
+</head>
+<body>
+	<!-- <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script> -->
+
+	<!-- Page 1: Title, Subtitle, Paragraph, and Graph -->
+	<div class="page-1">
+		<h1>O Carnaval de BH é para você? Descubra</h1>
+		<h2>Análise do perfil geral do folião de BH</h2>
+		<div class="page-1-content">
+		  <div class="text-and-graph">
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec hendrerit dui eget odio lacinia laoreet...
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec hendrerit dui eget odio lacinia laoreet...
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec hendrerit dui eget odio lacinia laoreet...
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec hendrerit dui eget odio lacinia laoreet...
+
+			</p>
+			<div class="graph-container">
+			  <img src="{{ url_for('static', filename='graph.png') }}" alt="Graph">
+			</div>
+		  </div>
+		</div>
+	  </div>>
+
+	  <!-- Page 2: Title, Subtitle, Paragraph, and Graph -->
+	  <div class="page-2">
+		<h1>O Carnaval de BH é para você? Descubra</h1>
+		<h2>Análise do perfil geral do folião de BH</h2>
+		<div class="page-2-content">
+		  <div class="text-and-graph">
+			<div class="graph-container">
+			  <img src="{{ url_for('static', filename='graph2.jpg') }}" alt="Graph">
+			</div>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec hendrerit dui eget odio lacinia laoreet...
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec hendrerit dui eget odio lacinia laoreet...
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec hendrerit dui eget odio lacinia laoreet...
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec hendrerit dui eget odio lacinia laoreet...
+			</p>
+		  </div>
+		</div>
+	  </div>
+	
+	<!-- BuzzFeed Quizz Form -->
+	<div class="container">
+		<h1>Descubra qual bloco é a sua cara</h1>
+		<form id="ml-form">
+		  <label for="idade">Idade:</label>
+		  <input type="number" name="idade" required><br><br>
+		  <label for="genero">Gênero:</label>
+		  <div class="dropdown">
+			<input type="text" class="dropbtn gender-dropbtn" value="Select" readonly>
+			<div class="dropdown-content gender-dropdown-content">
+			  <span value="M">Masculino</span>
+			  <span value="F">Feminino</span>
+			</div>
+			<input type="hidden" name="genero" id="gender-input" value="" required>
+		  </div><br><br>
+		  <label for="estado_civil">Estado Civil:</label>
+		  <div class="dropdown">
+			<input type="text" class="dropbtn civil-status-dropbtn" value="Select" readonly>
+			<div class="dropdown-content civil-status-dropdown-content">
+			  <span value="Solteiro (a)">Solteiro (a)</span>
+			  <span value="Casado (a)">Casado (a)</span>
+			  <span value="Outro">Outro</span>
+			  <span value="Divorciado (a)">Divorciado (a)</span>
+			  <span value="Viuvo (a)">Viuvo (a)</span>
+			  <span value="Nao respondeu">Não respondeu</span>
+			</div>
+			<input type="hidden" name="estado_civil" id="civil-status-input" value="" required>
+		  </div><br><br>
+		  <div class="faixa-renda-dropdown">
+			<label for="faixa_renda">Faixa de Renda:</label>
+			<div class="dropdown">
+			  <input type="text" class="dropbtn faixa-renda-dropbtn" value="Select" readonly>
+			  <div class="dropdown-content faixa-renda-dropdown-content">
+				<span value="De 2 a 4 salários (R$ 1.908,00 - R$ 3.816,00)">De 2 a 4 salários (R$ 1.908,00 - R$ 3.816,00)</span>
+				<span value="De 4 a 8 salários (R$ 3.816,00 - R$ 7.632,00)">De 4 a 8 salários (R$ 3.816,00 - R$ 7.632,00)</span>
+				<span value="Acima de 8 salários (acima de R$ 7.632,00)">Acima de 8 salários (acima de R$ 7.632,00)</span>
+				<span value="De 1 a 2 salários (R$ 954,00 - R$ 1.908,00)">De 1 a 2 salários (R$ 954,00 - R$ 1.908,00)</span>
+				<span value="Até um salário mínimo (R$ 954,00)">Até um salário mínimo (R$ 954,00)</span>
+			  </div>
+			  <input type="hidden" name="faixa_renda" id="faixa-renda-input" value="" required>
+			</div><br><br>
+		  </div>		  
+		  <button type="submit">Predict</button>
+		</form>
+		<div id="results" style="display: none;">
+		  <h2>O bloco que tem a sua cara é:</h2>
+		  <p id="prediction"></p>
+		</div>
+	  </div>
+	  
+	  <script>
+		const form = document.getElementById('ml-form');
+		const genderButtons = document.querySelectorAll('.gender-dropdown-content span');
+		const genderInput = document.querySelector('#gender-input');
+		const civilStatusButtons = document.querySelectorAll('.civil-status-dropdown-content span');
+		const civilStatusInput = document.querySelector('#civil-status-input');
+		const faixaRendaButtons = document.querySelectorAll('.faixa-renda-dropdown-content span');
+		const faixaRendaInput = document.querySelector('#faixa-renda-input');
+		const predictionElement = document.getElementById('prediction');
+		const resultsElement = document.getElementById('results');
+	  
+		form.addEventListener('submit', (e) => {
+		  e.preventDefault();
+		  const formData = new FormData(form);
+		  formData.set('genero', genderInput.value);
+		  formData.set('estado_civil', civilStatusInput.value);
+		  formData.set('faixa_renda', faixaRendaInput.value);
+	  
+		  fetch('/predict', {
+			method: 'POST',
+			body: formData
+		  })
+		  .then(response => response.json())
+		  .then(data => {
+			predictionElement.textContent = data.prediction;
+			resultsElement.style.display = 'block';
+		  })
+		  .catch(error => console.error(error));
+		});
+	  
+		genderButtons.forEach(button => {
+		  button.addEventListener('click', (e) => {
+			e.preventDefault();
+			genderInput.value = button.getAttribute('value');
+			document.querySelector('.gender-dropbtn').value = button.textContent;
+		  });
+		});
+	  
+		civilStatusButtons.forEach(button => {
+		  button.addEventListener('click', (e) => {
+			e.preventDefault();
+			civilStatusInput.value = button.getAttribute('value');
+			document.querySelector('.civil-status-dropbtn').value = button.textContent;
+		  });
+		});
+	  
+		faixaRendaButtons.forEach(button => {
+		  button.addEventListener('click', (e) => {
+			e.preventDefault();
+			faixaRendaInput.value = button.getAttribute('value');
+			document.querySelector('.faixa-renda-dropbtn').value = button.textContent;
+		  });
+		});
+	  </script>
+	  
